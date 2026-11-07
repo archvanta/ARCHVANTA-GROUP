@@ -1,0 +1,56 @@
+name: Verify and publish the demo
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      - name: Test the decision workflow
+        run: node --test
+      - name: Build the public artifact
+        run: node scripts/build.mjs
+      - name: Check the project subpath
+        run: |
+          node scripts/preview.mjs &
+          server_pid=$!
+          trap 'kill "$server_pid"' EXIT
+          base=http://127.0.0.1:4173/ARCHVANTA-GROUP
+          curl --fail --silent --show-error --retry 5 --retry-connrefused "$base/" | grep -F 'lang="fa" dir="rtl"'
+          for path in app.js model.js data.js icons.js styles.css assets/mark.svg assets/blueprint.svg assets/vazirmatn.woff2; do
+            curl --fail --silent --show-error "$base/$path" -o /dev/null
+          done
+      - name: Upload Pages artifact
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: verify
+    runs-on: ubuntu-latest
+    concurrency:
+      group: github-pages
+      cancel-in-progress: true
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

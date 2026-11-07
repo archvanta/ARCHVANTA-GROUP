@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 510 260" fill="none">
+  <defs>
+    <pattern id="grid" width="22" height="22" patternUnits="userSpaceOnUse"><path d="M0 22V0h22" stroke="#6be6c6" stroke-opacity=".13"/></pattern>
+    <radialGradient id="fade"><stop stop-color="white"/><stop offset="1" stop-color="black"/></radialGradient>
+    <mask id="mask"><ellipse cx="251" cy="133" rx="251" ry="131" fill="url(#fade)"/></mask>
+    <linearGradient id="face" x1="172" y1="67" x2="330" y2="230" gradientUnits="userSpaceOnUse"><stop stop-color="#48dbbb" stop-opacity=".19"/><stop offset="1" stop-color="#123a39" stop-opacity=".09"/></linearGradient>
+  </defs>
+  <rect width="510" height="260" fill="url(#grid)" mask="url(#mask)"/>
+  <g stroke="#70eacb" stroke-width="1" stroke-linejoin="round">
+    <path opacity=".28" stroke-dasharray="4 6" d="M54 178 250 68l202 105-195 71zM105 202l272-120M131 119l271 78M256 22v215"/>
+    <path opacity=".32" d="m82 174 173 56 170-58-170-85z"/>
+    <path opacity=".7" d="m106 170 149 52 146-51-146-73zv10l149 53 146-53v-9" fill="url(#face)"/>
+    <path opacity=".9" d="m142 156 113 43 111-43-111-61zv-17l113 43 111-43v17m-111 43v-17" fill="url(#face)"/>
+    <path opacity=".8" d="m175 134 80 32 79-32-79-48zv-22l80 30 79-30v22m-79 32v-22" fill="url(#face)"/>
+    <path d="m196 92 59 26 59-26-59-35zv-19l59 25 59-25v19m-59 26V99" fill="url(#face)"/>
+    <path d="m224 70 31 13 31-13-31-20zv-17l31 14 31-14v17m-31 13V66" fill="url(#face)"/>
+    <path opacity=".72" d="M255 49V25m-4 5 4-5 4 5M176 115l-44-16H86m246 17 53-19h33m-65 79 38 17h44M162 175l-42 17H76"/>
+    <path opacity=".47" d="m154 152 13 5m7 3 13 5m7 3 13 5m7 3 13 5m7 3 13 5m21 0 13-5m7-3 13-5m7-3 13-5m7-3 13-5m7-3 10-4M184 123l11 5m6 3 11 4m6 3 11 4m6 3 11 4m21 0 11-4m6-3 11-4m6-3 11-4m6-3 10-5"/>
+    <circle cx="255" cy="25" r="2.7" fill="#8ef0d2"/><circle cx="86" cy="99" r="3" fill="#13302e"/><circle cx="418" cy="97" r="3" fill="#13302e"/><circle cx="435" cy="193" r="3" fill="#13302e"/><circle cx="76" cy="192" r="3" fill="#13302e"/>
+  </g>
+  <g fill="#a2e9d8" fill-opacity=".73" font-family="monospace" font-size="8" letter-spacing="1.2"><text x="37" y="88">OPS / 01</text><text x="380" y="87">EXEC VIEW</text><text x="393" y="212">A–06</text><text x="61" y="213">HQ</text></g>
+</svg>
