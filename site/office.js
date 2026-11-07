@@ -89,7 +89,9 @@ function loginView(message = '') {
   auth = false;
   state = undefined;
   revision = undefined;
+  submission = undefined;
   if (dialog.open) dialog.close();
+  dialog.replaceChildren();
   for (const element of [$('.room-rail'), center, $('.inspector'), $('#logout'), $('#dashboard-link')]) element.hidden = true;
   $('#office-mode').textContent = 'ورود خصوصی';
   let form = $('#private-login');
@@ -110,6 +112,7 @@ function loginView(message = '') {
   }
   form.querySelector('[role="alert"]').textContent = message;
   $('#composer').reset();
+  $('#room-heading').textContent = 'دفتر عملیات';
   update('#inspector-content', '');
   update('#stage-notice', '');
   update('#schedule', '');
@@ -255,7 +258,8 @@ function runDetail(id, trigger) {
   const detail = (title, value) => value ? `<section class="run-detail"><h3>${title}</h3><p class="run-text">${html(value)}</p></section>` : '';
   const form = run.status === 'awaiting_approval' ? `<form id="office-decision" data-id="${html(run.id)}"><fieldset><legend>تصمیم مدیرعامل</legend><div class="decision-options">${Object.entries(decisionActions).map(([key, label]) => `<label><input type="radio" name="decision" value="${key}" required> ${label}</label>`).join('')}</div></fieldset><label for="office-note">یادداشت تصمیم</label><textarea id="office-note" name="note" rows="2" maxlength="500" aria-describedby="office-note-help"></textarea><p class="inspector-empty" id="office-note-help">برای رد یا درخواست اصلاح، دلیل لازم است.</p><p class="form-error" role="alert"></p><button class="office-button primary-office" type="submit">ثبت تصمیم</button></form>` : '';
   const canRevise = privateMode && model && run.status === 'needs_changes' && !state.runs.some(item => item.parent_id === run.id);
-  showDialog('جزئیات درخواست', `${status(run.status)} ${clock(run.created_at)}${detail('درخواست مدیرعامل', run.prompt)}${detail('بستهٔ تصمیم رئیس دفتر', run.briefing)}${detail('پیش‌نویس متخصص / محدوده', run.draft)}${detail('بازبینی مدیر دپارتمان', run.review)}${detail('اثر و ریسک', run.impact && `${risks[run.risk]} · ${run.impact}`)}${detail('یادداشت تصمیم', run.note)}${detail('وضعیت خطا', run.error)}${form}${canRevise ? `<button class="office-button primary-office" data-revise="${html(run.id)}" type="button">ارسال نسخهٔ اصلاحی</button>` : ''}`, trigger);
+  const modelName = run.model ? `<p class="inspector-empty">مدل اجرا <bdi>${html(run.model)}</bdi></p>` : '';
+  showDialog('جزئیات درخواست', `${status(run.status)} ${clock(run.created_at)}${modelName}${detail('درخواست مدیرعامل', run.prompt)}${detail('بستهٔ تصمیم رئیس دفتر', run.briefing)}${detail('پیش‌نویس متخصص / محدوده', run.draft)}${detail('بازبینی مدیر دپارتمان', run.review)}${detail('اثر و ریسک', run.impact && `${risks[run.risk]} · ${run.impact}`)}${detail('یادداشت تصمیم', run.note)}${detail('وضعیت خطا', run.error)}${form}${canRevise ? `<button class="office-button primary-office" data-revise="${html(run.id)}" type="button">ارسال نسخهٔ اصلاحی</button>` : ''}`, trigger);
 }
 
 function newRoom(trigger) {
