@@ -4,7 +4,12 @@ import { fileURLToPath } from 'node:url';
 
 const source = new URL('../site/', import.meta.url);
 const output = new URL('../dist/', import.meta.url);
-const publicFiles = ['index.html', 'styles.css', 'app.js', 'model.js', 'data.js', 'icons.js', 'assets/mark.svg', 'assets/blueprint.svg', 'assets/vazirmatn.woff2', 'assets/OFL-Vazirmatn.txt'];
+const publicFiles = [
+  'index.html', 'styles.css', 'app.js', 'model.js', 'data.js', 'icons.js',
+  'office.html', 'office.css', 'office.js', 'scene.js',
+  'assets/mark.svg', 'assets/blueprint.svg', 'assets/vazirmatn.woff2', 'assets/OFL-Vazirmatn.txt',
+  'assets/three/three.module.min.js', 'assets/three/three.core.min.js', 'assets/three/LICENSE.txt',
+];
 
 await rm(output, { recursive: true, force: true });
 for (const file of publicFiles) {

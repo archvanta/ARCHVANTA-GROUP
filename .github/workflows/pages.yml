@@ -17,7 +17,7 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: '24'
-      - name: Test the decision workflow
+      - name: Test the decision workflow and private API
         run: node --test
       - name: Build the public artifact
         run: node scripts/build.mjs
@@ -28,9 +28,11 @@ jobs:
           trap 'kill "$server_pid"' EXIT
           base=http://127.0.0.1:4173/ARCHVANTA-GROUP
           curl --fail --silent --show-error --retry 5 --retry-connrefused "$base/" | grep -F 'lang="fa" dir="rtl"'
-          for path in app.js model.js data.js icons.js styles.css assets/mark.svg assets/blueprint.svg assets/vazirmatn.woff2; do
+          for path in app.js model.js data.js icons.js styles.css office.html office.css office.js scene.js assets/mark.svg assets/blueprint.svg assets/vazirmatn.woff2 assets/three/three.module.min.js assets/three/three.core.min.js; do
             curl --fail --silent --show-error "$base/$path" -o /dev/null
           done
+          test ! -d dist/server
+          test ! -d dist/.runtime
       - name: Upload Pages artifact
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         uses: actions/upload-pages-artifact@v4

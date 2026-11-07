@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#edf1f2">
+  <meta name="description" content="دفتر عملیاتی سه‌بعدی ARCHVANTA GROUP و اتاق‌های دپارتمان‌ها">
+  <title>دفتر عملیات | ARCHVANTA GROUP</title>
+  <link rel="icon" href="./assets/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./office.css">
+  <script type="module" src="./office.js"></script>
+</head>
+<body class="office-body">
+  <a class="skip" href="#office-main">رفتن به محتوای دفتر</a>
+  <header class="office-top">
+    <a class="brand" href="./" id="office-home"><img src="./assets/mark.svg" width="39" height="39" alt=""><span class="brand-name" dir="ltr">ARCHVANTA<small>GROUP / OPERATIONS</small></span></a>
+    <div class="office-top-links"><a class="office-link" href="./#overview" id="dashboard-link">داشبورد مدیرعامل</a><span class="office-mode" id="office-mode" aria-live="polite"></span><button class="office-button" id="logout" type="button" hidden>خروج</button></div>
+  </header>
+  <main id="office-main" class="office-layout" tabindex="-1">
+    <aside class="room-rail" aria-label="اتاق‌های دفتر">
+      <div class="office-section-label">مقر مرکزی <span dir="ltr">HQ / 01</span></div>
+      <div class="room-shortcuts" role="group" aria-label="نمای دفتر">
+        <button type="button" data-view="office" aria-pressed="true"><span data-icon="building"></span><span><strong>دفتر عملیات</strong><small>وضعیت تیم‌ها و تصمیم‌ها</small></span></button>
+        <button type="button" data-view="schedule" aria-pressed="false"><span data-icon="calendar"></span><span><strong>زمان‌بندی اجرا</strong><small>کارهای آینده</small></span></button>
+      </div>
+      <div class="room-list-title"><h2>اتاق‌های تیم‌ها</h2><span id="room-count"></span></div>
+      <nav id="room-list" aria-label="انتخاب اتاق"></nav>
+      <button class="office-button new-room" id="new-room" type="button" hidden>+ اتاق جدید</button>
+    </aside>
+    <section class="office-center" aria-labelledby="room-heading">
+      <header class="room-head"><div><p class="office-section-label" id="room-code"></p><h1 id="room-heading">دفتر عملیات</h1><p id="room-summary"></p></div><span class="room-signal" id="room-signal"></span></header>
+      <div class="office-stage" id="office-stage">
+        <div class="stage-coordinates" dir="ltr" aria-hidden="true"><span>ARCHVANTA / WORKSPACE</span><span>ISO · 01</span></div>
+        <div class="office-viewport" id="office-viewport"></div>
+        <div class="stage-notice" id="stage-notice"></div>
+        <div class="stage-tools" id="stage-tools" hidden>
+          <button class="office-button" type="button" data-camera="left" aria-label="چرخش دفتر به چپ">↶</button>
+          <button class="office-button" type="button" data-camera="right" aria-label="چرخش دفتر به راست">↷</button>
+          <button class="office-button" type="button" data-camera="reset">نمای اولیه</button>
+        </div>
+      </div>
+      <div class="schedule" id="schedule" hidden></div>
+      <form class="composer" id="composer">
+        <label for="brief">درخواست به تیم</label>
+        <textarea id="brief" name="brief" rows="2" maxlength="2000" required placeholder="خروجی مورد نیاز، محدوده و معیار کیفیت را بنویسید…"></textarea>
+        <div class="composer-actions"><label class="gate"><input type="checkbox" id="gate" name="gate" checked> نیازمند تأیید مدیرعامل</label><button class="office-button" type="button" id="toggle-schedule" aria-expanded="false" aria-controls="schedule-field">زمان اجرا</button><button class="office-button primary-office" type="submit">ارسال به تیم</button></div>
+        <label class="schedule-field" id="schedule-field" hidden>زمان اجرا <input type="datetime-local" id="scheduled-at" name="scheduledAt"></label>
+        <p class="composer-note" id="composer-note"></p>
+      </form>
+      <p class="office-callout" id="office-callout" hidden></p>
+    </section>
+    <aside class="inspector" aria-label="جزئیات اتاق">
+      <div class="inspector-tabs" role="group" aria-label="نوع جزئیات"><button type="button" data-tab="inspect" aria-pressed="true">بازرس</button><button type="button" data-tab="outputs" aria-pressed="false">خروجی‌ها</button><button type="button" data-tab="thread" aria-pressed="false">گفت‌وگو</button></div>
+      <div id="inspector-content"></div>
+    </aside>
+  </main>
+  <dialog class="office-dialog" id="office-dialog" aria-labelledby="office-dialog-title"></dialog>
+  <div class="office-feedback" id="office-feedback" role="status" aria-live="polite"></div>
+</body>
+</html>

@@ -207,7 +207,7 @@ textarea { display: block; width: 100%; min-height: 69px; padding: 7px 9px; resi
   .brand img { width: 33px; height: 33px; }
   .brand-name { font-size: 13px; }
   .brand-name small { margin-block-start: 3px; }
-  .nav { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 3px; margin-block-start: 10px; }
+  .nav { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 3px; margin-block-start: 10px; }
   .nav a { justify-content: center; flex-direction: column; gap: 4px; padding: 5px 1px; min-height: 48px; text-align: center; font-size: .72rem; }
   .nav a svg { width: 16px; height: 16px; }
   .nav-count { display: none; }

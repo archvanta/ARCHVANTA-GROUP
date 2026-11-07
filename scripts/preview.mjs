@@ -15,7 +15,7 @@ const server = createServer(async (request, response) => {
   const path = pathname.startsWith(projectPath) ? pathname.slice(projectPath.length) : pathname.slice(1);
   const file = path || 'index.html';
   const type = types[extname(file)];
-  if (!type || !/^(?:assets\/)?[\w.-]+$/.test(file)) { response.writeHead(404).end(); return; }
+  if (!type || !/^(?:assets\/(?:three\/)?)?[\w.-]+$/.test(file)) { response.writeHead(404).end(); return; }
   try {
     const content = await readFile(new URL(file, root));
     response.writeHead(200, { 'content-type': type, 'cache-control': 'no-store' }).end(content);
